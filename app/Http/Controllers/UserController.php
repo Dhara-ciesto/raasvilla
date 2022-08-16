@@ -27,7 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create1');
+        return view('user.create');
     }
 
     /**
@@ -240,7 +240,7 @@ class UserController extends Controller
         $index = $offset + 1;
         foreach ($row as $key => $item) {
             $row[$key]['dob'] = date("d-m-Y", strtotime($item['dob']));
-            $row[$key]['photo'] = '<a href="' . $item['photo'] . '">' . $item['photo'] . '</a>';
+            $row[$key]['photo'] = '<a href="' . $item['photo'] . '">' . $item['photo'] . ' </a>&nbsp;<button type="button" class="btn badge-soft-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa fa-edit"></i></button>';
             $row[$key]['created_at'] = date("d-m-Y  h:i:s a", strtotime($item['created_at']));
             $row[$key]['counter'] = $index++;
         }
