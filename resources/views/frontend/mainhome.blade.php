@@ -40,6 +40,6 @@
      <img src="{{ asset('/assets/images/crypto/features-img/main-banner.jpeg') }}" class="w-100 h-100 desktop">
      <img src="{{ asset('/assets/images/crypto/features-img/mobile-banner.jpg') }}" class="w-100 h-100 mobile">
      <div class="but">
-        <a href="http://127.0.0.1:8000/user/register/create" class="text-white"><img src="{{ asset('/assets/images/crypto/features-img/giphy.gif') }}" class="w-100"></a>
+        <a href="{{ route('user.register.create') }}" class="text-white"><img src="{{ asset('/assets/images/crypto/features-img/giphy.gif') }}" class="w-100"></a>
 </div>
     </div>

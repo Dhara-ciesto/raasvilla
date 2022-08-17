@@ -67,28 +67,28 @@
         role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <form id="photo_edit" enctype="multipart/form-data" method="POST" >
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Change Photo</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Change Photo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="photo_edit" enctype="multipart/form-data" method="POST" action="{{ route('user.register.index') }}">
+                    @csrf
                         <label for="mobile_no" class="form-label">Photo</label>
                         <input type="hidden" class="form-control" id="modal_member_id" name="modal_member_id">
                         <div class="form-group">
-                            <input type="file" class="form-control" id="file" autocomplete="off" name="file"
+                            <input type="file" class="form-control required" id="photo" autocomplete="off" name="photo"
                                 required>
                         </div>
-                        @error('file')
+                        @error('photo')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
+                    </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal" id="close_modal">Close</button>
-                        <button type="submit" class="btn btn-primary" id="submit_btn">Upload</button>
+                        <button type="button" class="btn btn-primary" onclick="uploadPhoto()">Upload</button>
                     </div>
-                </form>
             </div>
         </div>
     </div>
@@ -119,10 +119,11 @@
     </script>
     {{-- <script src="https://unpkg.com/bootstrap-table@1.20.2/dist/bootstrap-table.min.js"></script> --}}
     {{-- <script src="https://unpkg.com/bootstrap-table@1.20.2/dist/extensions/export/bootstrap-table-export.min.js"></script> --}}
-
+    
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script> --}}
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
 
 
@@ -294,40 +295,139 @@
             })
 
         }
-        var form = $("#photo_edit");
-        // $('#photo_edit').on('submit', function(event) {
-        //     event.preventDefault();
-        // });
-        $("#photo_edit").validate({
-            errorPlacement: function(error, element) {
-                error.insertAfter(element.parent("div"));
-            },
+        // $("#photo_edit").validate({
+        //     errorPlacement: function(error, element) {
+        //         error.insertAfter(element.parent("div"));
+        //     },
+            
+        //     rules: { 
+        //         photo: { 
+        //             required: true
+        //         }
+        //     },
+        //     submitHandler: function(formd) {
+        //         let form = $("#photo_edit");
+        //         let form_data = new FormData(form[0]);
+        //         cosnole.log(form_data);
+        //         $.ajax({
+        //             url: '{{ route('user.photo.edit') }}',
+        //             type: "post",
+        //             contentType: false,
+        //             processData: false,
+        //             data: form_data.serialize(),
+        //             headers: {
+        //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //             },
+        //             beforeSend: function() {
+        //                 $('#submit_btn').prop('disabled', true)
+        //                 $('#submit_btn').text('Loading...')
+        //             },
+        //             success: function(data, textStatus, jqXHR) {
+        //                 $('#submit_btn').prop('disabled', false)
+        //                 $('#submit_btn').text('Submit')
+        //                 if (data.success) {
+        //                     const Toast = Swal.mixin({
+        //                         toast: true,
+        //                         position: 'top-end',
+        //                         showConfirmButton: false,
+        //                         timer: 3000,
+        //                         timerProgressBar: true,
+        //                         didOpen: (toast) => {
+        //                             toast.addEventListener('mouseenter', Swal.stopTimer)
+        //                             toast.addEventListener('mouseleave', Swal
+        //                                 .resumeTimer)
+        //                         }
+        //                     })
+        //                     Toast.fire({
+        //                         icon: 'success',
+        //                         title: data.message
+        //                     });
+        //                     // $table.bootstrapTable('refresh');
+        //                     // $('#photo_edit')[0].reset();
+        //                 } else {
+        //                     const Toast = Swal.mixin({
+        //                         toast: true,
+        //                         position: 'top-end',
+        //                         showConfirmButton: false,
+        //                         timer: 3000,
+        //                         timerProgressBar: true,
+        //                         didOpen: (toast) => {
+        //                             toast.addEventListener('mouseenter', Swal.stopTimer)
+        //                             toast.addEventListener('mouseleave', Swal
+        //                                 .resumeTimer)
+        //                         }
+        //                     })
+        //                     Toast.fire({
+        //                         icon: 'warning',
+        //                         title: data.message
+        //                     });
 
-            rules: {
-                start_date: "required",
-                end_date: "required"
-            },
-            submitHandler: function(form, event) {
-                let form_data = new FormData(form[0]);
-                $.ajax({
-                    url: '{{ route('user.photo.edit') }}',
-                    type: "post",
-                    contentType: false,
-                    processData: false,
-                    data: form_data,
-                    target: '#preview',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    beforeSend: function() {
-                        $('#submit_btn').prop('disabled', true)
-                        $('#submit_btn').text('Loading...')
-                    },
-                    success: function(data, textStatus, jqXHR) {
-                        $('#submit_btn').prop('disabled', false)
-                        $('#submit_btn').text('Submit')
-                        if (data.success) {
-                            const Toast = Swal.mixin({
+        //                 }
+
+        //             },
+        //             error: function(jqXHR, textStatus, errorThrown) {
+        //                 $('#submit_btn').prop('disabled', false)
+        //                 $('#submit_btn').text('Submit')
+        //                 console.log(jqXHR.responseJSON);
+
+        //                 if (jqXHR.responseJSON && jqXHR.responseJSON.errors) {
+        //                     $('.lara_error').remove(); // remove old errors
+
+        //                     $.each(jqXHR.responseJSON.errors, function(index, errorMessage) {
+        //                         element = dotToArray(index);
+        //                         console.log(element);
+        //                         $("input[name='" + element + "']").parent().next('span')
+        //                             .remove();
+        //                         $("select[name='" + element + "']").parent().next('span')
+        //                             .remove();
+
+        //                         let spanEl = document.createElement('span')
+        //                         $(spanEl).addClass('text-danger lara_error').text(
+        //                                 errorMessage)
+        //                             .insertAfter($("input[name='" + element + "']")
+        //                             .parent())
+        //                         $(spanEl).addClass('text-danger').text(errorMessage)
+        //                             .insertAfter($(
+        //                                 "select[name='" + element + "']").parent())
+        //                     });
+        //                     $('html, body').animate({
+        //                         scrollTop: $(".lara_error").offset().top - 150
+        //                     }, 1);
+        //                 }
+        //             }
+        //         });
+        //     }
+        // });
+        function uploadPhoto() {
+            var form = $("#photo_edit");
+            $("#photo_edit").validate({
+                errorPlacement: function(error, element) {
+                    console.log(error);
+                    error.insertAfter(element.parent("div"));
+                },
+                    rules: {
+                        photo: 'required',
+                        lastname: 'required',
+                        u_email: {
+                            required: true,
+                            email: true,//add an email rule that will ensure the value entered is valid email id.
+                            maxlength: 255,
+                        },
+                    }
+                });
+                    form_data = new FormData(form[0]);
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{ route('user.photo.edit') }}',
+                        data: form_data,
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(res) {
+                            if (res.success) {
+                                const Toast = Swal.mixin({
                                 toast: true,
                                 position: 'top-end',
                                 showConfirmButton: false,
@@ -341,101 +441,20 @@
                             })
                             Toast.fire({
                                 icon: 'success',
-                                title: data.message
+                                title: res.message
                             });
+                            $('#close_modal').trigger('click');
                             $table.bootstrapTable('refresh');
-                            // $('#photo_edit')[0].reset();
-                        } else {
-                            const Toast = Swal.mixin({
-                                toast: true,
-                                position: 'top-end',
-                                showConfirmButton: false,
-                                timer: 3000,
-                                timerProgressBar: true,
-                                didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal
-                                        .resumeTimer)
-                                }
-                            })
-                            Toast.fire({
-                                icon: 'warning',
-                                title: data.message
-                            });
-
+                            $('#photo_edit')[0].reset();
+                            }
+                            // console.log("res",res);
+                        },
+                        error: function() {
+                            console.log("Something went wrong!");
                         }
-
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        $('#submit_btn').prop('disabled', false)
-                        $('#submit_btn').text('Submit')
-                        console.log(jqXHR.responseJSON);
-
-                        if (jqXHR.responseJSON && jqXHR.responseJSON.errors) {
-                            $('.lara_error').remove(); // remove old errors
-
-                            $.each(jqXHR.responseJSON.errors, function(index, errorMessage) {
-                                element = dotToArray(index);
-                                console.log(element);
-                                $("input[name='" + element + "']").parent().next('span')
-                                    .remove();
-                                $("select[name='" + element + "']").parent().next('span')
-                                    .remove();
-
-                                let spanEl = document.createElement('span')
-                                $(spanEl).addClass('text-danger lara_error').text(
-                                        errorMessage)
-                                    .insertAfter($("input[name='" + element + "']")
-                                    .parent())
-                                $(spanEl).addClass('text-danger').text(errorMessage)
-                                    .insertAfter($(
-                                        "select[name='" + element + "']").parent())
-                            });
-                            $('html, body').animate({
-                                scrollTop: $(".lara_error").offset().top - 150
-                            }, 1);
-                        }
-                    }
-                });
-            }
-        });
-
-        // function uploadPhoto() {
-        //     var form = $("#photo_edit");
-        //     form.validate({
-        //         errorPlacement: function errorPlacement(error, element) {
-        //             element.after(error);
-        //         },
-        //         rules: {
-        //             rules: { inputimage: { required: true, accept: "png|jpe?g|gif", filesize: 5048576  }},
-        //             messages: { inputimage: "File must be JPG, GIF or PNG, less than 5MB" }
-        //         }
-        //         , submitHandler: function(form) {
-        //             form_data = new FormData(form[0]);
-        //             $.ajax({
-        //                 type: 'POST',
-        //                 url: '{{ route('user.photo.edit') }}',
-        //                 data: form_data,
-        //                 contentType: false,
-        //                 processData: false,
-        //                 headers: {
-        //                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //                 },
-        //                 success: function(res) {
-        //                     if (res.success) {
-        //                         $('#close_modal').trigger('click');
-        //                         $table.bootstrapTable('refresh');
-        //                     }
-        //                     // console.log("res",res);
-        //                 },
-        //                 error: function() {
-        //                     console.log("Something went wrong!");
-        //                 }
-        //             });
-        //         }
-        //     });
-
-        // }
+                    });
+                }
+         
 
         function setId(member_id) {
             $('#modal_member_id').val(member_id);

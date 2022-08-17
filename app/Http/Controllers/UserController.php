@@ -10,6 +10,11 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class UserController extends Controller
 {
+
+    public function mainhome()
+    {
+        return view('frontend.mainhome');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -318,13 +323,13 @@ class UserController extends Controller
     public function changePhoto(Request $request)
     {
         $member = Member_Register::findOrFail($request->modal_member_id);
-        if ($request->has('file')) {
-            $mark_sheet = $request->file('file');
+        if ($request->has('photo')) {
+            $mark_sheet = $request->file('photo');
             $mark_sheet_name = rand() . '.' . $mark_sheet->getClientOriginalExtension();
             $path = $mark_sheet->move(public_path('attachments/'), $mark_sheet_name);
             $photo = 'attachments/' . $mark_sheet_name;
+            $member->update(['photo' => $photo]);
         }
-        $member->update(['photo' => $photo]);
         return response()->json(['success' => true, 'message' => 'Photo Uploaded successfully']);
     }
 

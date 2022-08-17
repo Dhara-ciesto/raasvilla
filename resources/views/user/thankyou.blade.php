@@ -10,9 +10,15 @@
         .steps .clearfix {
             opacity: 0;
         }
+        .register-main{
+            background:#9f0622;
+        }
     </style>
-    <section class="section pt-4" id="about">
-        <div class="container card text-center">
+    <section class="section pt-4 register-main" id="about">
+        <div class="logo-section text-center">
+        <img src="{{ asset('/assets/images/crypto/features-img/logo.png') }}" class="" width="80px">
+        </div>
+        <div class="container card pt-5 mt-5 text-center">
             <h1 class="display-3 text-success">Thank You !</h1>
             <hr>
            

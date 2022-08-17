@@ -39,14 +39,6 @@ class HomeController extends Controller
         return view('index');
     }
 
-    public function home()
-    {
-        return view('home');
-    }
-    public function mainhome()
-    {
-        return view('frontend.mainhome');
-    }
     /*Language Translation*/
     public function lang($locale)
     {

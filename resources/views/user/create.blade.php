@@ -27,6 +27,9 @@
         .register-main{
             background:#9f0622;
         }
+        /* 17-08-2022 */
+            
+        /* 17-08-2022 */
     </style>
 
         <!-- <nav class="navbar navbar-expand-lg navigation fixed-top sticky  bg-primary">
@@ -65,10 +68,10 @@
         <img src="{{ asset('/assets/images/crypto/features-img/logo.png') }}" class="" width="80px">
         </div>
             <div class="container  mt-5 card">
-                <form id="contact" enctype="multipart/form-data" action="{{ route('user.register.store') }}" method="POST" redirect="{{ route('user.register.index') }}">
+                <form id="contact" enctype="multipart/form-data" action="{{ route('user.register.store') }}" method="POST" redirect="{{ route('user.register.success') }}">
                     @csrf
                     <div>
-                        <!-- <h3 class="d-none">Personal Details</h3> -->
+                        <h3 class="d-none">Personal Details</h3> 
                         <section>
                             <div class="container">
                                 <div id="form_section_">

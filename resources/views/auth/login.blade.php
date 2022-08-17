@@ -85,15 +85,14 @@
                             <div class="d-flex flex-column h-100">
                                 <div class="mb-4 mb-md-5">
                                     <a href="index" class="d-block auth-logo">
-                                        <img src="{{ URL::asset('/assets/images/logo-dark.png') }}" alt="" height="18" class="auth-logo-dark">
-                                        <img src="{{ URL::asset('/assets/images/logo-light.png') }}" alt="" height="18" class="auth-logo-light">
+                                        <img src="{{ asset('/assets/images/crypto/features-img/logo.png') }}" alt="" height="80" class="auth-logo-dark">
+                                        <img src="{{ asset('/assets/images/crypto/features-img/logo.png') }}" alt="" height="80" class="auth-logo-light">
                                     </a>
                                 </div>
                                 <div class="my-auto">
 
                                     <div>
                                         <h5 class="text-primary">Welcome Back !</h5>
-                                        <p class="text-muted">Sign in to continue to Skote.</p>
                                     </div>
 
                                     <div class="mt-4">
@@ -139,7 +138,7 @@
                                                     In</button>
                                             </div>
 
-                                            <div class="mt-4 text-center">
+                                            {{-- <div class="mt-4 text-center">
                                                 <h5 class="font-size-14 mb-3">Sign in with</h5>
 
                                                 <ul class="list-inline">
@@ -159,7 +158,7 @@
                                                         </a>
                                                     </li>
                                                 </ul>
-                                            </div>
+                                            </div> --}}
                                         </form>
                                         <div class="mt-5 text-center">
                                             <p>Don't have an account ? <a href="{{ url('register') }}" class="fw-medium text-primary"> Signup now </a> </p>
@@ -170,8 +169,8 @@
                                 <div class="mt-4 mt-md-5 text-center">
                                     <p class="mb-0">© <script>
                                             document.write(new Date().getFullYear())
-                                        </script> Skote. Crafted with <i class="mdi mdi-heart text-danger"></i> by
-                                        Themesbrand</p>
+                                        </script> Ciesto Solutions
+                                        </p>
                                 </div>
                             </div>
 
