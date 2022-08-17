@@ -17,12 +17,12 @@
                 </li>
                 <li>
                     <a href="{{ route('user.register.create') }}" class="waves-effect ">
-                        <i class="bx bx-home-circle"></i>
+                        <i class="bx bx-edit-alt"></i>
                         <span key="t-starter-page">@lang('translation.Register')</span>
                     </a>
                 </li>
 
-                <li class="menu-title" key="t-menu">@lang('translation.Pages')</li>
+                {{-- <li class="menu-title" key="t-menu">@lang('translation.Pages')</li>
 
                 <li>
                     <a href="javascript: void(0);" class="waves-effect">
@@ -77,7 +77,7 @@
                             </ul>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
 
             </ul>
         </div>

@@ -327,4 +327,9 @@ class UserController extends Controller
         $member->update(['photo' => $photo]);
         return response()->json(['success' => true, 'message' => 'Photo Uploaded successfully']);
     }
+
+    public function success()
+    {
+        return view('user.thankyou');
+    }
 }

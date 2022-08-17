@@ -70,7 +70,7 @@ class RegisterController extends Controller
         if (request()->has('avatar')) {            
             $avatar = request()->file('avatar');
             $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
-            $avatarPath = public_path('/images/');
+            $avatarPath = public_path('/images/users/');
             $avatar->move($avatarPath, $avatarName);
         }
         
@@ -79,7 +79,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'dob' => date('Y-m-d', strtotime($data['dob'])),
-            'avatar' => "/images/" . $avatarName,
+            'avatar' => "/images/users/" . $avatarName,
         ]);
     }
 }
