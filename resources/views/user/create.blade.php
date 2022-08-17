@@ -17,6 +17,7 @@ Rass Villa
     <style>
         .wizard .steps>ul {
             opacity: 0;
+            /* display:none !important; */
         }
         .steps .clearfix{
             opacity: 0;
@@ -25,9 +26,63 @@ Rass Villa
             display: none !important;
         }
         .register-main{
-            background:#9f0622;
+            min-height: 100vh;
+            background:url({{ asset('/assets/images/crypto/features-img/form-bg.png') }});
+            background-repeat: no-repeat;
+           
         }
-    </style>
+        .register-main .container{
+            max-width:900px !important;
+        }
+        .register-main .container{
+            border-radius:10px;
+           
+        }
+        textarea.form-control{
+            height:50px;
+        }
+        .form-control{
+            min-height:50px;
+        }
+        .btn-outline-primary{
+            color: #9f0622;
+    border-color:#9f0622;
+        }
+       .form-btn{
+            width:11% !important;
+        }
+        .btn-outline-primary:hover{
+            background-color: #9f0622 !important;
+            border-color:#9f0622;
+            box-shadow:unset !important;
+        }
+        label,h5{
+            color:#000;
+            font-size:15px;
+        }
+        /* h3{
+            position:unset !important;
+            left:unset !important;
+            color:#000 !important;
+            
+        } */
+        .actions a{
+            background-color:#9f0622  !important;
+        }
+        .card{
+            margin-top:-40px;
+        }
+        @media (min-width:767px) and (max-width:1025px){
+            .btn-outline-primary{
+            width:100%;
+        }
+        }
+        @media(max-width:1025px)
+{
+    .form-btn{
+            width:auto !important;
+        }
+}    </style>
 
         <!-- <nav class="navbar navbar-expand-lg navigation fixed-top sticky  bg-primary">
             <div class="container">
@@ -60,25 +115,25 @@ Rass Villa
             </div>
         </nav> -->
        
-        <section class="section pt-2  register-main" id="about">
-        <div class="logo-section text-center">
-        <img src="{{ asset('/assets/images/crypto/features-img/logo.png') }}" class="" width="80px">
+        <section class="section pt-2  ps-2 pe-2 pb-5 register-main" id="about">
+        <div class="logo-section pt-3 text-center">
+        <img src="{{ asset('/assets/images/crypto/features-img/logo.png') }}" class="" width="100px">
         </div>
-            <div class="container  mt-5 card">
+            <div class="container p-3 pt-5 pb-5 p-xl-4 pt-xl-5 pb-xl-5 p-md-4  mt-5 mb-0 pb-5 card">
                 <form id="contact" enctype="multipart/form-data" action="{{ route('user.register.store') }}" method="POST" redirect="{{ route('user.register.index') }}">
                     @csrf
                     <div>
                         <!-- <h3 class="d-none">Personal Details</h3> -->
-                        <section>
+                        <section >
                             <div class="container">
                                 <div id="form_section_">
                                     <!-- end row -->
                                     <div class="row">
-                                        <div class="col-lg-10 col-xl-10">
+                                        <div class="col-lg-12 col-xl-12">
                                             <div class="mb-3">
-                                                <div class="row mb-4">
-                                                    <div class="col-md-12">
-                                                        <div class="mb-3">
+                                                <div class="row ">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="">
                                                             <label for="account_holder_name">Full name<span
                                                                     class="text-danger">*</span></label>
                                                             <input type="text" class="form-control required"
@@ -151,25 +206,25 @@ Rass Villa
                                     <!-- end row -->
                                     <div class="row">
                                         <div class="col-lg-10 col-xl-10">
-                                            <div class="mb-3">
-                                                <div class="row mb-4">
+                                            <div class="">
+                                                <div class="row">
                                                     <div class="col-md-12">
-                                                        <div class="mb-3">
+                                                        <div class="">
                                                             <label for="name_label">Get entry as ?</label> <br>
                                                             <div class="row">
-                                                                <div class="col-md-1 p-sm-3">
-                                                                    <input type="button" class="btn btn-outline-primary"  id="couple" name="entry_as" value="Couple">
+                                                                <div class="col-xl-1 col-md-2 col-3 form-btn">
+                                                                    <input type="button" class=" btn btn-outline-primary"  id="couple" name="entry_as" value="Couple">
                                                                 </div>
-                                                                <div class="col-md-1 p-sm-3">
+                                                                <div class="col-xl-1 col-md-2 col-3 form-btn">
                                                                     <input type="button" class="btn btn-outline-primary"  id="group" name="entry_as" value="Group">
                                                                 </div>
-                                                                <div class="col-md-1 p-sm-3">
-                                                                    <input type="button" class="btn btn-outline-primary"  id="girl" name="entry_as" value="Girl">
+                                                                <div class="col-xl-1 col-md-2 col-3  ps-1 form-btn">
+                                                                    <input type="button" class=" btn btn-outline-primary"  id="girl" name="entry_as" value="Girl">
                                                                 </div>
                                                                 <input type="hidden" name="entry_type" id="entry_type">
                                                             </div>
-                                                            <br>
-                                                            <br>
+                                                            <!-- <br>
+                                                            <br> -->
                                                             <div id="entry_as_girl" class="toHide" style="display: none;">
                                                                 <label class="form-label">Details</label>
                                                                 <div class="row">
