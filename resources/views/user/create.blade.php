@@ -21,16 +21,22 @@
         .steps .clearfix {
             opacity: 0;
         }
+        .page-title-box{
+            display: none !important;
+        }
+        .register-main{
+            background:#9f0622;
+        }
     </style>
 
-    <nav class="navbar navbar-expand-lg navigation fixed-top sticky  bg-primary">
-        <div class="container">
-            <a class="navbar-logo" href="index">
-                <img src="http://skote-v.laravel.themesbrand.com/assets/images/logo-dark.png" alt="" height="19"
-                    class="logo logo-dark">
-                <img src="http://skote-v.laravel.themesbrand.com/assets/images/logo-light.png" alt="" height="19"
-                    class="logo logo-light">
-            </a>
+        <!-- <nav class="navbar navbar-expand-lg navigation fixed-top sticky  bg-primary">
+            <div class="container">
+                <a class="navbar-logo" href="index">
+                    <img src="http://skote-v.laravel.themesbrand.com/assets/images/logo-dark.png" alt=""
+                        height="19" class="logo logo-dark">
+                    <img src="http://skote-v.laravel.themesbrand.com/assets/images/logo-light.png" alt=""
+                        height="19" class="logo logo-light">
+                </a>
 
             <button type="button" class="btn btn-sm px-3 font-size-16 d-lg-none header-item waves-effect waves-light"
                 data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
@@ -47,43 +53,45 @@
                     </li>
                 </ul>
 
-                <div class="my-2 ms-lg-2">
-                    <a href="#" class="btn btn-outline-success w-xs">Sign in</a>
+                    <div class="my-2 ms-lg-2">
+                        <a href="#" class="btn btn-outline-success w-xs">Sign in</a>
+                    </div>
                 </div>
             </div>
+        </nav> -->
+       
+        <section class="section pt-2  register-main" id="about">
+        <div class="logo-section text-center">
+        <img src="{{ asset('/assets/images/crypto/features-img/logo.png') }}" class="" width="80px">
         </div>
-    </nav>
-
-    <section class="section pt-4" id="about">
-        <div class="container card mt-5">
-            <form id="contact" enctype="multipart/form-data" action="{{ route('user.register.success') }}" method="POST"
-                redirect="{{ route('user.register.success') }}">
-                @csrf
-                <div>
-                    <h3 class="d-none">Personal Details</h3>
-                    <section>
-                        <div class="container">
-                            <div id="form_section_">
-                                <!-- end row -->
-                                <div class="row">
-                                    <div class="col-lg-10 col-xl-10">
-                                        <div class="mb-3">
-                                            <div class="row mb-4">
-                                                <div class="col-md-12">
-                                                    <div class="mb-3">
-                                                        <label for="account_holder_name">Full name<span
-                                                                class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control required" name="full_name"
-                                                            id="full_name" value="{{ old('full_name') }}"
-                                                            placeholder="Full Name">
-                                                        @error('full_name')
-                                                            <p class="error text-danger">{{ $message }}</p>
-                                                        @enderror
+            <div class="container  mt-5 card">
+                <form id="contact" enctype="multipart/form-data" action="{{ route('user.register.store') }}" method="POST" redirect="{{ route('user.register.index') }}">
+                    @csrf
+                    <div>
+                        <!-- <h3 class="d-none">Personal Details</h3> -->
+                        <section>
+                            <div class="container">
+                                <div id="form_section_">
+                                    <!-- end row -->
+                                    <div class="row">
+                                        <div class="col-lg-10 col-xl-10">
+                                            <div class="mb-3">
+                                                <div class="row mb-4">
+                                                    <div class="col-md-12">
+                                                        <div class="mb-3">
+                                                            <label for="account_holder_name">Full name<span
+                                                                    class="text-danger">*</span></label>
+                                                            <input type="text" class="form-control required"
+                                                                name="full_name" id="full_name"
+                                                                value="{{ old('full_name') }}" placeholder="Full Name">
+                                                            @error('full_name')
+                                                                <p class="error text-danger">{{ $message }}</p>
+                                                            @enderror
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="mb-3">
-                                                        <label for="mobile_no" class="form-label">Mobile No.<span
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <label for="mobile_no" class="form-label">Mobile No.<span
                                                                 class="error">*</span></label>
                                                         <input type="text" class="form-control" id="mobile_no"
                                                             autocomplete="off" placeholder="Mobile No" name="mobile_no"
