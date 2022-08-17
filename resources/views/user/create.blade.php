@@ -16,6 +16,7 @@
     <style>
         .wizard .steps>ul {
             opacity: 0;
+            /* display:none !important; */
         }
 
         .steps .clearfix {
@@ -25,12 +26,63 @@
             display: none !important;
         }
         .register-main{
-            background:#9f0622;
+            min-height: 100vh;
+            background:url({{ asset('/assets/images/crypto/features-img/form-bg.png') }});
+            background-repeat: no-repeat;
+           
         }
-        /* 17-08-2022 */
+        .register-main .container{
+            max-width:900px !important;
+        }
+        .register-main .container{
+            border-radius:10px;
+           
+        }
+        textarea.form-control{
+            height:50px;
+        }
+        .form-control{
+            min-height:50px;
+        }
+        .btn-outline-primary{
+            color: #9f0622;
+    border-color:#9f0622;
+        }
+       .form-btn{
+            width:11% !important;
+        }
+        .btn-outline-primary:hover{
+            background-color: #9f0622 !important;
+            border-color:#9f0622;
+            box-shadow:unset !important;
+        }
+        label,h5{
+            color:#000;
+            font-size:15px;
+        }
+        /* h3{
+            position:unset !important;
+            left:unset !important;
+            color:#000 !important;
             
-        /* 17-08-2022 */
-    </style>
+        } */
+        .actions a{
+            background-color:#9f0622  !important;
+        }
+        .card{
+            margin-top:-40px;
+        }
+        @media (min-width:767px) and (max-width:1025px){
+            .btn-outline-primary{
+            width:100%;
+        }
+        }
+        @media(max-width:1025px)
+{
+    .form-btn{
+            width:auto !important;
+        }
+}    </style>
 
         <!-- <nav class="navbar navbar-expand-lg navigation fixed-top sticky  bg-primary">
             <div class="container">
@@ -63,25 +115,25 @@
             </div>
         </nav> -->
        
-        <section class="section pt-2  register-main" id="about">
-        <div class="logo-section text-center">
-        <img src="{{ asset('/assets/images/crypto/features-img/logo.png') }}" class="" width="80px">
+        <section class="section pt-2  ps-2 pe-2 pb-5 register-main" id="about">
+        <div class="logo-section pt-3 text-center">
+        <img src="{{ asset('/assets/images/crypto/features-img/logo.png') }}" class="" width="100px">
         </div>
-            <div class="container  mt-5 card">
-                <form id="contact" enctype="multipart/form-data" action="{{ route('user.register.store') }}" method="POST" redirect="{{ route('user.register.success') }}">
+            <div class="container p-3 pt-5 pb-5 p-xl-4 pt-xl-5 pb-xl-5 p-md-4  mt-5 mb-0 pb-5 card">
+                <form id="contact" enctype="multipart/form-data" action="{{ route('user.register.store') }}" method="POST" redirect="{{ route('user.register.index') }}">
                     @csrf
                     <div>
-                        <h3 class="d-none">Personal Details</h3> 
-                        <section>
+                        <!-- <h3 class="d-none">Personal Details</h3> -->
+                        <section >
                             <div class="container">
                                 <div id="form_section_">
                                     <!-- end row -->
                                     <div class="row">
-                                        <div class="col-lg-10 col-xl-10">
+                                        <div class="col-lg-12 col-xl-12">
                                             <div class="mb-3">
-                                                <div class="row mb-4">
-                                                    <div class="col-md-12">
-                                                        <div class="mb-3">
+                                                <div class="row ">
+                                                    <div class="col-md-12 mb-3">
+                                                        <div class="">
                                                             <label for="account_holder_name">Full name<span
                                                                     class="text-danger">*</span></label>
                                                             <input type="text" class="form-control required"
@@ -96,48 +148,48 @@
                                                         <div class="mb-3">
                                                             <label for="mobile_no" class="form-label">Mobile No.<span
                                                                 class="error">*</span></label>
-                                                        <input type="text" class="form-control" id="mobile_no"
-                                                            autocomplete="off" placeholder="Mobile No" name="mobile_no"
-                                                            required>
-                                                        @error('mobile_no')
-                                                            <div class="text-danger">{{ $message }}</div>
-                                                        @enderror
+                                                                <input type="text" class="form-control" id="mobile_no"
+                                                                autocomplete="off" placeholder="Mobile No"
+                                                                name="mobile_no" required>
+                                                                @error('mobile_no')
+                                                                <div class="text-danger">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="mb-3">
-                                                        <label for="address" class="form-label">Address<span
-                                                                class="error">*</span></label>
-                                                        <textarea type="text" class="form-control required" id="address" autocomplete="off" placeholder="Enter Address"
-                                                            name="address"></textarea>
-                                                        @error('address')
-                                                            <div class="text-danger">{{ $message }}</div>
-                                                        @enderror
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <label for="address" class="form-label">Address<span
+                                                                    class="error">*</span></label>
+                                                            <textarea type="text" class="form-control required" id="address" autocomplete="off" placeholder="Enter Address"
+                                                                name="address"></textarea>
+                                                            @error('address')
+                                                                <div class="text-danger">{{ $message }}</div>
+                                                            @enderror
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <label for="email_id" class="form-label">
-                                                    <h5>Refrence By</h5>
-                                                </label>
-                                                <br>
-                                                <div class="col-md-6">
-                                                    <div class="mb-3">
-                                                        <label for="email_id" class="form-label">Name</label>
-                                                        <input type="text" class="form-control" id="ref_name"
-                                                            autocomplete="off" placeholder="Name" name="ref_name" required>
-                                                        @error('ref_name')
-                                                            <div class="text-danger">{{ $message }}</div>
-                                                        @enderror
+                                                        <label for="email_id" class="form-label"><h5>Refrence By</h5></label>
+                                                    <br>
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <label for="email_id" class="form-label">Name</label>
+                                                            <input type="text" class="form-control" id="ref_name"
+                                                                autocomplete="off" placeholder="Name" name="ref_name"
+                                                                required>
+                                                            @error('ref_name')
+                                                                <div class="text-danger">{{ $message }}</div>
+                                                            @enderror
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="mb-3">
-                                                        <label for="mobile_no" class="form-label">Number</label>
-                                                        <input type="text" class="form-control" id="ref_number"
-                                                            autocomplete="off" placeholder="Number" name="ref_number"
-                                                            required>
-                                                        @error('ref_number')
-                                                            <div class="text-danger">{{ $message }}</div>
-                                                        @enderror
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <label for="mobile_no" class="form-label">Number</label>
+                                                            <input type="text" class="form-control" id="ref_number"
+                                                                autocomplete="off" placeholder="Number" name="ref_number"
+                                                                required>
+                                                            @error('ref_number')
+                                                                <div class="text-danger">{{ $message }}</div>
+                                                            @enderror
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -145,345 +197,295 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- end container -->
-                    </section>
-                    <h3 class="d-none">Banking details</h3>
-                    <section>
-                        <div class="container">
-                            <div id="form_section_">
-                                <!-- end row -->
-                                <div class="row">
-                                    <div class="col-lg-10 col-xl-10">
-                                        <div class="mb-3">
-                                            <div class="row mb-4">
-                                                <div class="col-md-12">
-                                                    <div class="mb-3">
-                                                        <label for="name_label">Get entry as ?</label> <br>
-                                                        <div class="row">
-                                                            <div class="col-md-1 p-sm-3">
-                                                                <input type="button" class="btn btn-outline-primary"
-                                                                    id="couple" name="entry_as" value="Couple">
-                                                            </div>
-                                                            <div class="col-md-1 p-sm-3">
-                                                                <input type="button" class="btn btn-outline-primary"
-                                                                    id="group" name="entry_as" value="Group">
-                                                            </div>
-                                                            <div class="col-md-1 p-sm-3">
-                                                                <input type="button" class="btn btn-outline-primary"
-                                                                    id="girl" name="entry_as" value="Girl">
-                                                            </div>
-                                                            <input type="hidden" name="entry_type" id="entry_type">
-                                                        </div>
-                                                        <br>
-                                                        <br>
-                                                        <div id="entry_as_girl" class="toHide" style="display: none;">
-                                                            <label class="form-label">Details</label>
+                            <!-- end container -->
+                        </section>
+                        <h3 class="d-none">Banking details</h3>
+                        <section>
+                            <div class="container">
+                                <div id="form_section_">
+                                    <!-- end row -->
+                                    <div class="row">
+                                        <div class="col-lg-10 col-xl-10">
+                                            <div class="">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="">
+                                                            <label for="name_label">Get entry as ?</label> <br>
                                                             <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <div class="mb-3">
-                                                                        <label for="instagram_id">Member Name <span
-                                                                                class="text-danger">*</span></label>
-                                                                        <input type="text" class="form-control"
-                                                                            id="girl_member_name" autocomplete="off"
-                                                                            placeholder="Name" name="girl_member_name"
-                                                                            required>
-                                                                        @error('girl_member_name')
-                                                                            <p class="error text-danger">{{ $message }}
-                                                                            </p>
-                                                                        @enderror
-                                                                    </div>
+                                                                <div class="col-xl-1 col-md-2 col-3 form-btn">
+                                                                    <input type="button" class=" btn btn-outline-primary"  id="couple" name="entry_as" value="Couple">
                                                                 </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="mb-3">
-                                                                        <label for="instagram_id">Mobile No.<span
-                                                                                class="text-danger">*</span></label>
-                                                                        <input type="text" class="form-control"
-                                                                            id="girl_mobile_no" autocomplete="off"
-                                                                            placeholder="Mobile No" name="girl_mobile_no"
-                                                                            required>
-                                                                        @error('girl_mobile_no')
-                                                                            <p class="error text-danger">{{ $message }}
-                                                                            </p>
-                                                                        @enderror
-                                                                    </div>
+                                                                <div class="col-xl-1 col-md-2 col-3 form-btn">
+                                                                    <input type="button" class="btn btn-outline-primary"  id="group" name="entry_as" value="Group">
                                                                 </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="mb-3">
-                                                                        <label for="instagram_id">Instagram ID <span
-                                                                                class="text-danger">*</span></label>
-                                                                        <input type="text" class="form-control"
-                                                                            id="instagram_id" autocomplete="off"
-                                                                            placeholder="Instagram ID" name="instagram_id"
-                                                                            required>
-                                                                        @error('instagram_id')
-                                                                            <p class="error text-danger">{{ $message }}
-                                                                            </p>
-                                                                        @enderror
-                                                                    </div>
+                                                                <div class="col-xl-1 col-md-2 col-3  ps-1 form-btn">
+                                                                    <input type="button" class=" btn btn-outline-primary"  id="girl" name="entry_as" value="Girl">
                                                                 </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="mb-3">
-                                                                        <label for="DOB" class="form-label">DOB<span
-                                                                                class="error">*</span></label>
-                                                                        <input type="date" class="form-control"
-                                                                            id="dob" autocomplete="off"
-                                                                            placeholder="Select Date" name="dob"
-                                                                            required>
-                                                                        @error('dob')
-                                                                            <div class="text-danger">{{ $message }}</div>
-                                                                        @enderror
+                                                                <input type="hidden" name="entry_type" id="entry_type">
+                                                            </div>
+                                                            <!-- <br>
+                                                            <br> -->
+                                                            <div id="entry_as_girl" class="toHide" style="display: none;">
+                                                                <label class="form-label">Details</label>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="instagram_id">Member Name <span class="text-danger">*</span></label>
+                                                                            <input type="text" class="form-control" id="girl_member_name" 
+                                                                                autocomplete="off" placeholder="Name"
+                                                                                name="girl_member_name" required>
+                                                                            @error('girl_member_name')
+                                                                            <p class="error text-danger">{{ $message }}</p>
+                                                                            @enderror
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="mb-3">
-                                                                        <label for="DOB"
-                                                                            class="form-label">Photo<span
-                                                                                class="error">*</span></label>
-                                                                        <input type="file" class="form-control"
-                                                                            id="mem_photo" autocomplete="off"
-                                                                            name="photo" required>
-                                                                        @error('photo')
-                                                                            <div class="text-danger">{{ $message }}</div>
-                                                                        @enderror
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="instagram_id">Mobile No.<span class="text-danger">*</span></label>
+                                                                            <input type="text" class="form-control" id="girl_mobile_no" 
+                                                                                autocomplete="off" placeholder="Mobile No"
+                                                                                name="girl_mobile_no" required>
+                                                                            @error('girl_mobile_no')
+                                                                            <p class="error text-danger">{{ $message }}</p>
+                                                                            @enderror
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="mb-3">
-                                                                        <label for="DOB" class="form-label">ID
-                                                                            Proof<span class="error">*</span></label>
-                                                                        <input type="file" class="form-control"
-                                                                            id="id_proof" autocomplete="off"
-                                                                            name="id_proof" required>
-                                                                        @error('id_proof')
-                                                                            <div class="text-danger">{{ $message }}</div>
-                                                                        @enderror
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="instagram_id">Instagram ID <span class="text-danger">*</span></label>
+                                                                            <input type="text" class="form-control" id="instagram_id"
+                                                                                autocomplete="off" placeholder="Instagram ID"
+                                                                                name="instagram_id" required>
+                                                                            @error('instagram_id')
+                                                                            <p class="error text-danger">{{ $message }}</p>
+                                                                            @enderror
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="DOB" class="form-label">DOB<span
+                                                                                    class="error">*</span></label>
+                                                                            <input type="date" class="form-control" id="dob"
+                                                                                autocomplete="off" placeholder="Select Date"
+                                                                                name="dob" required>
+                                                                            @error('dob')
+                                                                                <div class="text-danger">{{ $message }}</div>
+                                                                            @enderror
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="DOB" class="form-label">Photo<span
+                                                                                    class="error">*</span></label>
+                                                                            <input type="file" class="form-control" id="mem_photo"
+                                                                                autocomplete="off" 
+                                                                                name="photo" required>
+                                                                            @error('photo')
+                                                                                <div class="text-danger">{{ $message }}</div>
+                                                                            @enderror
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="DOB" class="form-label">ID Proof<span
+                                                                                    class="error">*</span></label>
+                                                                            <input type="file" class="form-control" id="id_proof"
+                                                                                autocomplete="off"
+                                                                                name="id_proof" required>
+                                                                            @error('id_proof')
+                                                                                <div class="text-danger">{{ $message }}</div>
+                                                                            @enderror
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div id="entry_as_couple" class="toHide" style="display: none;">
+                                                            <div id="entry_as_couple" class="toHide" style="display: none;">
 
-                                                            <br>
-                                                            <label class="form-label">
-                                                                <h5>Memeber 1 Details</h5>
-                                                            </label>
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <div class="mb-3">
-                                                                        <label for="instagram_id">Member Name <span
-                                                                                class="text-danger">*</span></label>
-                                                                        <input type="text" class="form-control"
-                                                                            id="mem1_name" autocomplete="off"
-                                                                            placeholder="Name" name="mem1_name" required>
-                                                                        @error('mem1_name')
-                                                                            <p class="error text-danger">{{ $message }}
-                                                                            </p>
-                                                                        @enderror
+                                                                <br>
+                                                                <label class="form-label"><h5>Memeber 1 Details</h5></label>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="instagram_id">Member Name <span class="text-danger">*</span></label>
+                                                                            <input type="text" class="form-control" id="mem1_name" 
+                                                                                autocomplete="off" placeholder="Name"
+                                                                                name="mem1_name" required>
+                                                                            @error('mem1_name')
+                                                                            <p class="error text-danger">{{ $message }}</p>
+                                                                            @enderror
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="instagram_id">Mobile No.<span class="text-danger">*</span></label>
+                                                                            <input type="text" class="form-control" id="mem1_mobile_no" 
+                                                                                autocomplete="off" placeholder="Mobile No"
+                                                                                name="mem1_mobile_no" required>
+                                                                            @error('mem1_mobile_no')
+                                                                            <p class="error text-danger">{{ $message }}</p>
+                                                                            @enderror
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="instagram_id">Instagram ID <span class="text-danger">*</span></label>
+                                                                            <input type="text" class="form-control" id="mem1_insta_id"
+                                                                                autocomplete="off" placeholder="Instagram ID"
+                                                                                name="mem1_insta_id" required>
+                                                                            @error('mem1_insta_id')
+                                                                            <p class="error text-danger">{{ $message }}</p>
+                                                                            @enderror
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="DOB" class="form-label">DOB<span
+                                                                                    class="error">*</span></label>
+                                                                            <input type="date" class="form-control" id="mem1_dob"
+                                                                                autocomplete="off" placeholder="Select Date"
+                                                                                name="mem1_dob" required>
+                                                                            @error('mem1_dob')
+                                                                                <div class="text-danger">{{ $message }}</div>
+                                                                            @enderror
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="DOB" class="form-label">Photo<span
+                                                                                    class="error">*</span></label>
+                                                                            <input type="file" class="form-control" id="mem1_photo"
+                                                                                autocomplete="off" 
+                                                                                name="mem1_photo" required>
+                                                                            @error('mem1_photo')
+                                                                                <div class="text-danger">{{ $message }}</div>
+                                                                            @enderror
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="DOB" class="form-label">ID Proof<span
+                                                                                    class="error">*</span></label>
+                                                                            <input type="file" class="form-control" id="mem1_id_proof"
+                                                                                autocomplete="off"
+                                                                                name="mem1_id_proof" required>
+                                                                            @error('mem1_id_proof')
+                                                                                <div class="text-danger">{{ $message }}</div>
+                                                                            @enderror
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="mb-3">
-                                                                        <label for="instagram_id">Mobile No.<span
-                                                                                class="text-danger">*</span></label>
-                                                                        <input type="text" class="form-control"
-                                                                            id="mem1_mobile_no" autocomplete="off"
-                                                                            placeholder="Mobile No" name="mem1_mobile_no"
-                                                                            required>
-                                                                        @error('mem1_mobile_no')
-                                                                            <p class="error text-danger">{{ $message }}
-                                                                            </p>
-                                                                        @enderror
+                                                                <br>
+                                                                <label class="form-label"><h5>Memeber 2 Details</h5></label>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="email_id" class="form-label">Name</label>
+                                                                            <input type="text" class="form-control" id="mem2 _name"
+                                                                                autocomplete="off" placeholder="Name" name="mem2_name"
+                                                                                required>
+                                                                            @error('mem2_name')
+                                                                                <div class="text-danger">{{ $message }}</div>
+                                                                            @enderror
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="mobile_no" class="form-label">Mobile No</label>
+                                                                            <input type="text" class="form-control" id="mem2_mobile_no"
+                                                                                autocomplete="off" placeholder="Number" name="mem2_mobile_no"
+                                                                                required>
+                                                                            @error('mem2_mobile_no')
+                                                                                <div class="text-danger">{{ $message }}</div>
+                                                                            @enderror
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="instagram_id">Instagram ID <span class="text-danger">*</span></label>
+                                                                            <input type="text" class="form-control" id="mem2_insta_id"
+                                                                                autocomplete="off" placeholder="Instagram ID"
+                                                                                name="mem2_insta_id" required>
+                                                                            @error('mem2_insta_id')
+                                                                            <p class="error text-danger">{{ $message }}</p>
+                                                                            @enderror
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="DOB" class="form-label">DOB<span
+                                                                                    class="error">*</span></label>
+                                                                            <input type="date" class="form-control" id="mem2_dob"
+                                                                                autocomplete="off" placeholder="Select Date"
+                                                                                name="mem2_dob" required>
+                                                                            @error('mem2_dob')
+                                                                                <div class="text-danger">{{ $message }}</div>
+                                                                            @enderror
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="DOB" class="form-label">Photo<span
+                                                                                    class="error">*</span></label>
+                                                                            <input type="file" class="form-control" id="mem2_photo"
+                                                                                autocomplete="off" 
+                                                                                name="mem2_photo" required>
+                                                                            @error('mem2_photo')
+                                                                                <div class="text-danger">{{ $message }}</div>
+                                                                            @enderror
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label for="DOB" class="form-label">ID Proof<span
+                                                                                    class="error">*</span></label>
+                                                                            <input type="file" class="form-control" id="mem2_id_proof"
+                                                                                autocomplete="off"
+                                                                                name="mem2_id_proof" required>
+                                                                            @error('mem2_id_proof')
+                                                                                <div class="text-danger">{{ $message }}</div>
+                                                                            @enderror
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="mb-3">
-                                                                        <label for="instagram_id">Instagram ID <span
-                                                                                class="text-danger">*</span></label>
-                                                                        <input type="text" class="form-control"
-                                                                            id="mem1_insta_id" autocomplete="off"
-                                                                            placeholder="Instagram ID"
-                                                                            name="mem1_insta_id" required>
-                                                                        @error('mem1_insta_id')
-                                                                            <p class="error text-danger">{{ $message }}
-                                                                            </p>
-                                                                        @enderror
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="mb-3">
-                                                                        <label for="DOB" class="form-label">DOB<span
-                                                                                class="error">*</span></label>
-                                                                        <input type="date" class="form-control"
-                                                                            id="mem1_dob" autocomplete="off"
-                                                                            placeholder="Select Date" name="mem1_dob"
-                                                                            required>
-                                                                        @error('mem1_dob')
-                                                                            <div class="text-danger">{{ $message }}</div>
-                                                                        @enderror
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="mb-3">
-                                                                        <label for="DOB"
-                                                                            class="form-label">Photo<span
-                                                                                class="error">*</span></label>
-                                                                        <input type="file" class="form-control"
-                                                                            id="mem1_photo" autocomplete="off"
-                                                                            name="mem1_photo" required>
-                                                                        @error('mem1_photo')
-                                                                            <div class="text-danger">{{ $message }}</div>
-                                                                        @enderror
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="mb-3">
-                                                                        <label for="DOB" class="form-label">ID
-                                                                            Proof<span class="error">*</span></label>
-                                                                        <input type="file" class="form-control"
-                                                                            id="mem1_id_proof" autocomplete="off"
-                                                                            name="mem1_id_proof" required>
-                                                                        @error('mem1_id_proof')
-                                                                            <div class="text-danger">{{ $message }}</div>
-                                                                        @enderror
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <br>
-                                                            <label class="form-label">
-                                                                <h5>Memeber 2 Details</h5>
-                                                            </label>
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <div class="mb-3">
-                                                                        <label for="email_id"
-                                                                            class="form-label">Name</label>
-                                                                        <input type="text" class="form-control"
-                                                                            id="mem2 _name" autocomplete="off"
-                                                                            placeholder="Name" name="mem2_name" required>
-                                                                        @error('mem2_name')
-                                                                            <div class="text-danger">{{ $message }}</div>
-                                                                        @enderror
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="mb-3">
-                                                                        <label for="mobile_no" class="form-label">Mobile
-                                                                            No</label>
-                                                                        <input type="text" class="form-control"
-                                                                            id="mem2_mobile_no" autocomplete="off"
-                                                                            placeholder="Number" name="mem2_mobile_no"
-                                                                            required>
-                                                                        @error('mem2_mobile_no')
-                                                                            <div class="text-danger">{{ $message }}</div>
-                                                                        @enderror
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="mb-3">
-                                                                        <label for="instagram_id">Instagram ID <span
-                                                                                class="text-danger">*</span></label>
-                                                                        <input type="text" class="form-control"
-                                                                            id="mem2_insta_id" autocomplete="off"
-                                                                            placeholder="Instagram ID"
-                                                                            name="mem2_insta_id" required>
-                                                                        @error('mem2_insta_id')
-                                                                            <p class="error text-danger">{{ $message }}
-                                                                            </p>
-                                                                        @enderror
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="mb-3">
-                                                                        <label for="DOB" class="form-label">DOB<span
-                                                                                class="error">*</span></label>
-                                                                        <input type="date" class="form-control"
-                                                                            id="mem2_dob" autocomplete="off"
-                                                                            placeholder="Select Date" name="mem2_dob"
-                                                                            required>
-                                                                        @error('mem2_dob')
-                                                                            <div class="text-danger">{{ $message }}</div>
-                                                                        @enderror
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="mb-3">
-                                                                        <label for="DOB"
-                                                                            class="form-label">Photo<span
-                                                                                class="error">*</span></label>
-                                                                        <input type="file" class="form-control"
-                                                                            id="mem2_photo" autocomplete="off"
-                                                                            name="mem2_photo" required>
-                                                                        @error('mem2_photo')
-                                                                            <div class="text-danger">{{ $message }}</div>
-                                                                        @enderror
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="mb-3">
-                                                                        <label for="DOB" class="form-label">ID
-                                                                            Proof<span class="error">*</span></label>
-                                                                        <input type="file" class="form-control"
-                                                                            id="mem2_id_proof" autocomplete="off"
-                                                                            name="mem2_id_proof" required>
-                                                                        @error('mem2_id_proof')
-                                                                            <div class="text-danger">{{ $message }}</div>
-                                                                        @enderror
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <br>
-                                                            <div class="repeater">
-                                                                <div data-repeater-list="childs" class="outer">
-                                                                    <label class="form-label" id="label_group">
-                                                                        <h5>Child Details</h5>
-                                                                    </label>
-                                                                    <div data-repeater-item class="row">
-                                                                        <div class="col-md-6 col-sm-5">
-                                                                            <div class="mb-3">
-                                                                                <label for="instagram_id">Name <span
-                                                                                        class="text-danger">*</span></label>
-                                                                                <input type="text" class="form-control"
-                                                                                    id="child_name" autocomplete="off"
-                                                                                    placeholder="Name" name="child_name"
-                                                                                    required>
-                                                                                @error('child_name')
-                                                                                    <p class="error text-danger">
-                                                                                        {{ $message }}</p>
-                                                                                @enderror
+                                                                <br>
+                                                                <div class="repeater">
+                                                                    <div data-repeater-list="childs" class="outer">
+                                                                        <label class="form-label" id="label_group"><h5>Child Details</h5></label>
+                                                                        <div data-repeater-item class="row">
+                                                                            <div class="col-md-6 col-sm-5">
+                                                                                <div class="mb-3">
+                                                                                    <label for="instagram_id">Name <span class="text-danger">*</span></label>
+                                                                                    <input type="text" class="form-control" id="child_name" 
+                                                                                        autocomplete="off" placeholder="Name"
+                                                                                        name="child_name" required>
+                                                                                    @error('child_name')
+                                                                                    <p class="error text-danger">{{ $message }}</p>
+                                                                                    @enderror
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5 col-sm-5">
+                                                                                <div class="mb-3">
+                                                                                    <label for="instagram_id">DOB <span class="text-danger">*</span></label>
+                                                                                    <input type="date" class="form-control" id="child_dob" 
+                                                                                        autocomplete="off" placeholder="Name"
+                                                                                        name="child_dob" required>
+                                                                                    @error('child_dob')
+                                                                                    <p class="error text-danger">{{ $message }}</p>
+                                                                                    @enderror
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-1 col-sm-1 delete mt-2 pt-sm-4 float-sm-end float-md-end my-sm-3">
+                                                                                <span data-repeater-delete class="" type="button"><i class='bx bxs-trash-alt bx-xs error'></i></span>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-md-5 col-sm-5">
-                                                                            <div class="mb-3">
-                                                                                <label for="instagram_id">DOB <span
-                                                                                        class="text-danger">*</span></label>
-                                                                                <input type="date" class="form-control"
-                                                                                    id="child_dob" autocomplete="off"
-                                                                                    placeholder="Name" name="child_dob"
-                                                                                    required>
-                                                                                @error('child_dob')
-                                                                                    <p class="error text-danger">
-                                                                                        {{ $message }}</p>
-                                                                                @enderror
-                                                                            </div>
-                                                                        </div>
-                                                                        <div
-                                                                            class="col-md-1 col-sm-1 delete mt-2 pt-sm-4 float-sm-end float-md-end my-sm-3">
-                                                                            <span data-repeater-delete class=""
-                                                                                type="button"><i
-                                                                                    class='bx bxs-trash-alt bx-xs error'></i></span>
-                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-12 text-end">
+                                                                        <button data-repeater-create type="button" class="btn btn-outline-primary mt-3 mt-lg-0"><i class='bx bx-plus'></i></button>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-lg-12 text-end">
-                                                                    <button data-repeater-create type="button"
-                                                                        class="btn btn-outline-primary mt-3 mt-lg-0"><i
-                                                                            class='bx bx-plus'></i></button>
-                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div id="entry_as_group" class="toHide" style="display: none;">
-                                                            <div class="repeater" id="repeater">
+                                                            <div id="entry_as_group" class="toHide" style="display: none;">
+                                                                <div class="repeater" id="repeater">
 
                                                                 <div data-repeater-list="group_a" class="outer">
                                                                     <label class="form-label" id="label_group">
