@@ -72,14 +72,19 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <label for="mobile_no" class="form-label">Photo</label>
-                    <input type="file" class="form-control" id="file" autocomplete="off" name="file" required>
-                    @error('photo')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
+                    <form id="photo_edit" enctype="multipart/form-data" method="POST">
+                        @csrf
+                        <label for="mobile_no" class="form-label">Photo</label>
+                        <input type="hidden" class="form-control" id="modal_member_id" name="modal_member_id">
+                        <input type="file" class="form-control" id="file" autocomplete="off" name="file"
+                            required>
+                        @error('photo')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal" id="close_modal">Close</button>
                     <button type="button" class="btn btn-primary" onclick="uploadPhoto()">Upload</button>
                 </div>
             </div>
@@ -115,6 +120,7 @@
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
 
 
 
@@ -287,8 +293,50 @@
 
         }
 
-        function uploadPhoto(){
-            
+        function uploadPhoto() {
+            var form = $("#photo_edit");
+            form.validate({
+                errorPlacement: function errorPlacement(error, element) {
+                    element.after(error);
+                },
+                rules: {
+                    mobile_no: {
+                        required: true,
+                        minlength: 10,
+                        maxlength: 10,
+                        number: true
+                    },
+                    ref_number: {
+                        required: false,
+                        number: true
+                    }
+                }
+            });
+            form_data = new FormData(form[0]);
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('user.photo.edit') }}',
+                data: form_data,
+                contentType: false,
+                processData: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(res) {
+                    if (res.success) {
+                        $('#close_modal').trigger('click');
+                        $table.bootstrapTable('refresh');
+                    }
+                    // console.log("res",res);
+                },
+                error: function() {
+                    console.log("Something went wrong!");
+                }
+            });
+        }
+
+        function setId(member_id) {
+            $('#modal_member_id').val(member_id);
         }
     </script>
     @if (Session::has('success'))

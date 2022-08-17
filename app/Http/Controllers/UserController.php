@@ -240,7 +240,7 @@ class UserController extends Controller
         $index = $offset + 1;
         foreach ($row as $key => $item) {
             $row[$key]['dob'] = date("d-m-Y", strtotime($item['dob']));
-            $row[$key]['photo'] = '<a href="' . $item['photo'] . '">' . $item['photo'] . ' </a>&nbsp;<button type="button" class="btn badge-soft-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa fa-edit"></i></button>';
+            $row[$key]['photo'] = '<a href="' . asset($item['photo']) . '">' . $item['photo'] . ' </a>&nbsp;<button type="button" class="btn badge-soft-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="setId('.$item['id'].')"><i class="fa fa-edit"></i></button>';
             $row[$key]['created_at'] = date("d-m-Y  h:i:s a", strtotime($item['created_at']));
             $row[$key]['counter'] = $index++;
         }
@@ -297,7 +297,7 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Change the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -307,5 +307,24 @@ class UserController extends Controller
         $brand = Member_Register::findOrFail($id);
         $brand->update(['status' => $request->status]);
         return response()->json(['success' => true, 'message' => 'User changed successfully']);
+    }
+
+    /**
+     * Change the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function changePhoto(Request $request)
+    {
+        $member = Member_Register::findOrFail($request->modal_member_id);
+        if ($request->has('file')) {
+            $mark_sheet = $request->file('file');
+            $mark_sheet_name = rand() . '.' . $mark_sheet->getClientOriginalExtension();
+            $path = $mark_sheet->move(public_path('attachments/'), $mark_sheet_name);
+            $photo = 'attachments/' . $mark_sheet_name;
+        }
+        $member->update(['photo' => $photo]);
+        return response()->json(['success' => true, 'message' => 'Photo Uploaded successfully']);
     }
 }

@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('root');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 
 //Update User Details
 Route::post('/update-profile/{id}', [App\Http\Controllers\HomeController::class, 'updateProfile'])->name('updateProfile');
@@ -33,6 +34,7 @@ Route::post('user/register/store', [App\Http\Controllers\UserController::class, 
 Route::get('user/register', [App\Http\Controllers\UserController::class, 'server_side'])->name('user.register.server_side');
 Route::get('user/register/index', [App\Http\Controllers\UserController::class, 'index'])->name('user.register.index');
 Route::get('user/change_status/{id}', [App\Http\Controllers\UserController::class, 'changeStatus'])->name('user.change_status');
+Route::post('user/change_photo', [App\Http\Controllers\UserController::class, 'changePhoto'])->name('user.photo.edit');
 
 Route::get('/test/test',  function() {
     return  phpinfo();
