@@ -21,9 +21,15 @@ Rass Villa
         .steps .clearfix{
             opacity: 0;
         }
+        .page-title-box{
+            display: none !important;
+        }
+        .register-main{
+            background:#9f0622;
+        }
     </style>
 
-        <nav class="navbar navbar-expand-lg navigation fixed-top sticky  bg-primary">
+        <!-- <nav class="navbar navbar-expand-lg navigation fixed-top sticky  bg-primary">
             <div class="container">
                 <a class="navbar-logo" href="index">
                     <img src="http://skote-v.laravel.themesbrand.com/assets/images/logo-dark.png" alt=""
@@ -52,14 +58,17 @@ Rass Villa
                     </div>
                 </div>
             </div>
-        </nav>
-
-        <section class="section pt-4" id="about">
-            <div class="container card mt-5">
+        </nav> -->
+       
+        <section class="section pt-2  register-main" id="about">
+        <div class="logo-section text-center">
+        <img src="{{ asset('/assets/images/crypto/features-img/logo.png') }}" class="" width="80px">
+        </div>
+            <div class="container  mt-5 card">
                 <form id="contact" enctype="multipart/form-data" action="{{ route('user.register.store') }}" method="POST" redirect="{{ route('user.register.index') }}">
                     @csrf
                     <div>
-                        <h3 class="d-none">Personal Details</h3>
+                        <!-- <h3 class="d-none">Personal Details</h3> -->
                         <section>
                             <div class="container">
                                 <div id="form_section_">

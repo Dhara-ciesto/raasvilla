@@ -43,7 +43,10 @@ class HomeController extends Controller
     {
         return view('home');
     }
-
+    public function mainhome()
+    {
+        return view('frontend.mainhome');
+    }
     /*Language Translation*/
     public function lang($locale)
     {
